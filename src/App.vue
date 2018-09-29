@@ -1,43 +1,27 @@
 <template>
-  <div id="app" @click="ripple">
-    <router-view></router-view>
+  <div id="app">
+    <router-view/>
   </div>
 </template>
 
 <script>
 export default {
-    name: 'app',
-    methods: {
-        ripple(e) {
-            const target = e.target
-            if (target.tagName.toLowerCase() !== 'button') {
-                return false
-            }
-            const rect = target.getBoundingClientRect()
-            let ripple = target.querySelector('.ripple')
-            if (!ripple) {
-                ripple = document.createElement('span')
-                ripple.className = 'ripple'
-                ripple.style.height = ripple.style.width = Math.max(rect.width, rect.height) + 'px'
-                target.appendChild(ripple)
-            }
-            ripple.classList.remove('show')
-            const top = e.pageY - rect.top - ripple.offsetHeight / 2 - document.body.scrollTop
-            const left = e.pageX - rect.left - ripple.offsetWidth / 2 - document.body.scrollLeft
-            ripple.style.top = top + 'px'
-            ripple.style.left = left + 'px'
-            ripple.classList.add('show')
-            return false
-        }
-    },
-    mounted() {
-        this.changeLanguage(localStorage.getItem('lang'))
-    }
+  name: 'App'
 }
 </script>
 
 <style lang="less">
-#app {
+.size{
+  width: 100%;
   height: 100%;
+}
+html,body{
+  .size;
+  overflow: hidden;
+  margin: 0;
+  padding: 0;
+}
+#app {
+  .size;
 }
 </style>
