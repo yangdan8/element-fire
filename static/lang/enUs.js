@@ -1,0 +1,28 @@
+const enUs = {
+    cooco_demo_book_author: "Author",
+    cooco_demo_book_authorInfo: "Author Info",
+    cooco_demo_book_check: "Book Check",
+    cooco_demo_book_code: "Book Code",
+    cooco_demo_book_edit: "Book Edit",
+    cooco_demo_book_info: "Book Info",
+    cooco_demo_book_list: "Book List",
+    cooco_demo_book_name: "Book Name",
+    cooco_public_button_add: "Add",
+    cooco_public_button_cancel: "Cancel",
+    cooco_public_button_check: "Check",
+    cooco_public_button_close: "Close",
+    cooco_public_button_delete: "Delete",
+    cooco_public_button_edit: "Edit",
+    cooco_public_button_save: "Save",
+    cooco_public_button_search: "Search",
+    cooco_public_rules_beOccupied: " has been Occupied",
+    cooco_public_rules_floatOnly: "Numbers Only(Integer or Float)",
+    cooco_public_rules_malformedEmail: "Wrong Email Format",
+    cooco_public_rules_maxLength: "Character's length is out of range,you could not input characters more than ",
+    cooco_public_rules_notNull: "Null is not allowed",
+    cooco_public_rules_numbersOnly: "Please Input Numbers",
+    cooco_public_rules_urlOnly: "Please Input A Right URL",
+    cooco_public_rules_wrongFormat: "Wrong Format",
+    cooco_public_table_handle: "Handle"
+}
+export default  enUs

@@ -1,0 +1,47 @@
+.el-form-item {
+    border-top: 1px dashed #eee;
+    margin: 0;
+    padding: 15px 40px 15px 40px;
+    box-sizing: border-box;
+    font-size: 16px;
+    &:first-child {
+        border: none;
+    }
+    .el-input {
+        width: 100%;
+    }
+    .el-form-item__label {
+        font-size: 16px;
+        padding: 0 25px 0 0;
+        width: 12em;
+        float: left;
+    }
+    .el-form-item__content {
+        margin-left: 14em;
+    }
+}
+.el-form {
+    overflow-x: hidden;
+    overflow-y: auto;
+    &:-webkit-scrollbar {
+        width: 0;
+        height: 0;
+    }
+}
+
+.formList{
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+    box-shadow: none;
+    .el-table {
+        td {
+            // padding: 0;
+        }
+        .el-icon-edit .el-icon-delete {
+            font-size: 20px;
+            color: #bcc6cd;
+            margin: 0 5px;
+        }
+    }
+}

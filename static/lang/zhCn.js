@@ -1,0 +1,28 @@
+const zhCn = {
+    cooco_demo_book_author: "作者",
+    cooco_demo_book_authorInfo: "作者信息",
+    cooco_demo_book_check: "书籍查看",
+    cooco_demo_book_code: "书籍code",
+    cooco_demo_book_edit: "书籍编辑",
+    cooco_demo_book_info: "书籍信息",
+    cooco_demo_book_list: "书籍列表",
+    cooco_demo_book_name: "书籍名称",
+    cooco_public_button_add: "新增",
+    cooco_public_button_cancel: "取消",
+    cooco_public_button_check: "查看",
+    cooco_public_button_close: "关闭",
+    cooco_public_button_delete: "删除",
+    cooco_public_button_edit: "编辑",
+    cooco_public_button_save: "保存",
+    cooco_public_button_search: "搜索",
+    cooco_public_rules_beOccupied: "已被占用",
+    cooco_public_rules_floatOnly: "必须为数字值（整数或小数）",
+    cooco_public_rules_malformedEmail: "邮箱格式不正确",
+    cooco_public_rules_maxLength: "长度超出范围，最多允许字符数",
+    cooco_public_rules_notNull: "不能为空",
+    cooco_public_rules_numbersOnly: "请输入数字",
+    cooco_public_rules_urlOnly: "请正确填写URL格式",
+    cooco_public_rules_wrongFormat: "格式不正确",
+    cooco_public_table_handle: "操作"
+}
+export default  zhCn

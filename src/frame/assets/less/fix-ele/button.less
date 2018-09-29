@@ -1,0 +1,59 @@
+@import '../color';
+.el-button {
+    position: relative;
+    border-radius: 1px;
+    overflow: hidden;
+    border: none;
+}
+
+// el-button样式覆盖
+
+.el-button {
+    padding: 0 10px;
+    min-height: 32px;
+    min-width: 80px;
+    span {
+        width: 100%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: space-around;
+        .material-icons {
+            font-size: 20px;
+        }
+    }
+}
+
+.fix-button(@color){
+    background-color: @color;
+    border-color: @color;
+    &:active, &:hover, &:focus{
+        background-color: darken(@color,5%);
+        border-color: darken(@color,10%)
+    }
+}
+nav>.el-button{
+    display: none;
+}
+.el-button--primary{
+    .fix-button(@color-primary)
+}
+.el-button--success{
+    .fix-button(@color-success)
+}
+.el-button--danger{
+    .fix-button(@color-danger)
+}
+.el-button--info{
+    color: @color-info;
+    border: 1px @color-info solid;
+    background-color: #fff;
+}
+// button大小
+.el-button--small{
+    padding: 7px 10px!important;
+}
+.el-button--mini{
+    padding: 5px 6px!important;
+    min-height: unset;
+    min-width: unset;
+}
