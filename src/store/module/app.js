@@ -23,6 +23,7 @@ const closePage = (state, route) => {
 
 export default {
   state: {
+    isLoading: false, // 是否加载中
     breadCrumbList: [],
     tagNavList: [],
     homeRoute: getHomeRoute(routers),
@@ -32,6 +33,9 @@ export default {
     menuList: (state, getters, rootState) => getMenuByRouter(routers, rootState.user.access)
   },
   mutations: {
+    setIsLoading (state, status) {
+      state.isLoading = status
+    },
     setBreadCrumb (state, route) {
       state.breadCrumbList = getBreadCrumbList(route, state.homeRoute)
     },
