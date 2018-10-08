@@ -19,9 +19,9 @@
             </Header>
             <Content class="main-content-con">
                 <Layout class="main-layout-con">
-                    <div class="tag-nav-wrapper">
+                    <!-- <div class="tag-nav-wrapper">
                         <tags-nav :value="$route" @input="handleClick" :list="tagNavList" @on-close="handleCloseTag" />
-                    </div>
+                    </div> -->
                     <Content class="content-wrapper">
                         <keep-alive :include="cacheList">
                             <router-view />
@@ -162,34 +162,34 @@ export default {
         // 设置初始语言
         this.setLocal(this.$i18n.locale);
         // 文档提示
-        this.$Notice.info({
-            'title': '想快速上手，去看文档吧',
-            'duration': 0,
-            'render': h => {
-                return h(
-                    'p',
-                    {
-                        'style': {
-                            'fontSize': '13px'
-                        }
-                    },
-                    [
-                        '点击',
-                        h(
-                            'a',
-                            {
-                                'attrs': {
-                                    'href': 'https://lison16.github.io/iview-admin-doc/#/',
-                                    'target': '_blank'
-                                }
-                            },
-                            'iview-admin2.0文档'
-                        ),
-                        '快速查看'
-                    ]
-                );
-            }
-        });
+        // this.$Notice.info({
+        //     'title': '想快速上手，去看文档吧',
+        //     'duration': 0,
+        //     'render': h => {
+        //         return h(
+        //             'p',
+        //             {
+        //                 'style': {
+        //                     'fontSize': '13px'
+        //                 }
+        //             },
+        //             [
+        //                 '点击',
+        //                 h(
+        //                     'a',
+        //                     {
+        //                         'attrs': {
+        //                             'href': 'https://lison16.github.io/iview-admin-doc/#/',
+        //                             'target': '_blank'
+        //                         }
+        //                     },
+        //                     'iview-admin2.0文档'
+        //                 ),
+        //                 '快速查看'
+        //             ]
+        //         );
+        //     }
+        // });
         const fnGetRouters = (curRoutersOld, curRoutesNew) => {
             for (let i = curRoutersOld.length - 1; i >= 0; i--) {
                 const route = curRoutersOld[i],

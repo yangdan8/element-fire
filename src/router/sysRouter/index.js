@@ -55,21 +55,21 @@ export default [
           icon: 'ios-document',
           title: '上传Csv'
         },
-        component: () => import('@/view/update/update-table.vue')
+        component: () => import('@/view/sys/menu/menus.vue')
       },
       {
-        path: 'update_paste_page',
-        name: 'update_paste_page',
+        path: 'importantDeptList',
+        name: 'importantDeptList',
         meta: {
           icon: 'md-clipboard',
           title: '粘贴表格数据'
         },
-        component: () => import('@/view/update/update-paste.vue')
+        component: () => import('@/view/importantDept/importantDeptList.vue')
       }
     ]
   },
   {
-    path: '/excel',
+    path: '/',
     name: 'excel',
     meta: {
       icon: 'ios-stats',
@@ -78,22 +78,15 @@ export default [
     component: Main,
     children: [
       {
-        path: 'upload-excel',
-        name: 'upload-excel',
+        path: 'dict',
+        name: 'dict',
         meta: {
-          icon: 'md-add',
-          title: '导入EXCEL'
+          icon: 'ios-stats',
+          title: 'EXCEL导入导出'
         },
-        component: () => import('@/view/excel/upload-excel.vue')
-      },
-      {
-        path: 'export-excel',
-        name: 'export-excel',
-        meta: {
-          icon: 'md-download',
-          title: '导出EXCEL'
-        },
-        component: () => import('@/view/excel/export-excel.vue')
+        component: resolve => {
+          require(['@/view/dict/dict-index.vue'], resolve);
+        }
       }
     ]
   }

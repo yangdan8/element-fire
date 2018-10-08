@@ -75,5 +75,16 @@ export default [
       hideInMenu: true
     },
     component: () => import('@/view/error-page/404.vue')
+  },
+  {
+    path: 'dictEdit/:id',
+    name: 'dictEdit',
+    meta: {
+      icon: 'ios-stats',
+      title: '重点单位'
+    },
+    component: resolve => {
+      require(['@/view//dict/dict-edit.vue'], resolve);
+    }
   }
 ];
