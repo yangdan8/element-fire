@@ -41,10 +41,10 @@ import Fullscreen from './components/fullscreen';
 import Language from './components/language';
 import { mapMutations, mapActions } from 'vuex';
 import {
-    getNewTagList,
-    getNextRoute,
-    routeEqual,
-    getMenuByRouter
+  getNewTagList,
+  getNextRoute,
+  routeEqual,
+  getMenuByRouter
 } from '@/libs/util';
 import routers from '@/router/routers';
 import myRoutes from '@/mockData/menus.json';
@@ -52,168 +52,170 @@ import minLogo from '@/assets/images/logo-xiao.jpg';
 import maxLogo from '@/assets/images/logo-big.jpg';
 import './main.less';
 export default {
-    'name': 'Main',
-    'components': {
-        SideMenu,
-        HeaderBar,
-        Language,
-        TagsNav,
-        Fullscreen,
-        User
+  name: 'Main',
+  components: {
+    SideMenu,
+    HeaderBar,
+    Language,
+    TagsNav,
+    Fullscreen,
+    User
+  },
+  data() {
+    return {
+      collapsed: false,
+      minLogo,
+      maxLogo,
+      isFullscreen: false,
+      isShowMenu: false
+    };
+  },
+  computed: {
+    tagNavList() {
+      return this.$store.state.app.tagNavList;
     },
-    data() {
-        return {
-            'collapsed': false,
-            minLogo,
-            maxLogo,
-            'isFullscreen': false,
-            'isShowMenu': false
-        };
+    tagRouter() {
+      return this.$store.state.app.tagRouter;
     },
-    'computed': {
-        tagNavList() {
-            return this.$store.state.app.tagNavList;
-        },
-        tagRouter() {
-            return this.$store.state.app.tagRouter;
-        },
-        userAvator() {
-            return this.$store.state.user.avatorImgPath;
-        },
-        cacheList() {
-            return this.tagNavList.length ?
-                this.tagNavList
-                    .filter(item => !(item.meta && item.meta.notCache))
-                    .map(item => item.name) :
-                [];
-        },
-        menuList() {
-            return this.$store.state.menuList;
-        },
-        local() {
-            return this.$store.state.app.local;
-        }
+    userAvator() {
+      return this.$store.state.user.avatorImgPath;
     },
-    'methods': {
-        ...mapMutations(['setBreadCrumb', 'setTagNavList', 'addTag', 'setLocal']),
-        ...mapActions(['handleLogin']),
-        turnToPage(route) {
-            let { name, params, query } = {};
+    cacheList() {
+      return this.tagNavList.length
+        ? this.tagNavList
+            .filter(item => !(item.meta && item.meta.notCache))
+            .map(item => item.name)
+        : [];
+    },
+    menuList() {
+      return this.$store.state.menuList;
+    },
+    local() {
+      return this.$store.state.app.local;
+    }
+  },
+  methods: {
+    ...mapMutations(['setBreadCrumb', 'setTagNavList', 'addTag', 'setLocal']),
+    ...mapActions(['handleLogin']),
+    turnToPage(route) {
+      let { name, params, query } = {};
 
-            if (typeof route === 'string') {
-                name = route;
-            } else {
-                name = route.name;
-                params = route.params;
-                query = route.query;
-            }
-            if (name.indexOf('isTurnByHref_') > -1) {
-                window.open(name.split('_')[1]);
-                return;
-            }
-            this.$router.push({
-                name,
-                params,
-                query
-            });
-        },
-        handleCollapsedChange(state) {
-            this.collapsed = state;
-        },
-        handleCloseTag(res, type, route) {
-            if (type === 'all') {
-                this.turnToPage('home');
-            } else if (routeEqual(this.$route, route)) {
-                if (type === 'others') {
-                } else {
-                    const nextRoute = getNextRoute(this.tagNavList, route);
-
-                    this.$router.push(nextRoute);
-                }
-            }
-            this.setTagNavList(res);
-        },
-        handleClick(item) {
-            this.turnToPage(item);
-        }
+      if (typeof route === 'string') {
+        name = route;
+      } else {
+        name = route.name;
+        params = route.params;
+        query = route.query;
+      }
+      if (name.indexOf('isTurnByHref_') > -1) {
+        window.open(name.split('_')[1]);
+        return;
+      }
+      this.$router.push({
+        name,
+        params,
+        query
+      });
     },
-    'watch': {
-        $route(newRoute) {
-            const { name, query, params, meta } = newRoute;
-
-            this.addTag({
-                'route': { name, query, params, meta },
-                'type': 'push'
-            });
-            this.setBreadCrumb(newRoute);
-            this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
-            this.$refs.sideMenu.updateOpenName(newRoute.name);
-        }
+    handleCollapsedChange(state) {
+      this.collapsed = state;
     },
-    mounted() {
+    handleCloseTag(res, type, route) {
+      if (type === 'all') {
+        this.turnToPage('home');
+      } else if (routeEqual(this.$route, route)) {
+        if (type === 'others') {
+        } else {
+          const nextRoute = getNextRoute(this.tagNavList, route);
+
+          this.$router.push(nextRoute);
+        }
+      }
+      this.setTagNavList(res);
+    },
+    handleClick(item) {
+      this.turnToPage(item);
+    }
+  },
+  watch: {
+    $route(newRoute) {
+      const { name, query, params, meta } = newRoute;
+
+      this.addTag({
+        route: { name, query, params, meta },
+        type: 'push'
+      });
+      this.setBreadCrumb(newRoute);
+      this.setTagNavList(getNewTagList(this.tagNavList, newRoute));
+      this.$refs.sideMenu.updateOpenName(newRoute.name);
+    }
+  },
+  mounted() {
     /**
      * @description 初始化设置面包屑导航和标签导航
      */
-        this.setTagNavList();
-        this.addTag({
-            'route': this.$store.state.app.homeRoute
-        });
-        this.setBreadCrumb(this.$route);
-        // 设置初始语言
-        this.setLocal(this.$i18n.locale);
-        // 文档提示
-        // this.$Notice.info({
-        //     'title': '想快速上手，去看文档吧',
-        //     'duration': 0,
-        //     'render': h => {
-        //         return h(
-        //             'p',
-        //             {
-        //                 'style': {
-        //                     'fontSize': '13px'
-        //                 }
-        //             },
-        //             [
-        //                 '点击',
-        //                 h(
-        //                     'a',
-        //                     {
-        //                         'attrs': {
-        //                             'href': 'https://lison16.github.io/iview-admin-doc/#/',
-        //                             'target': '_blank'
-        //                         }
-        //                     },
-        //                     'iview-admin2.0文档'
-        //                 ),
-        //                 '快速查看'
-        //             ]
-        //         );
-        //     }
-        // });
-        const fnGetRouters = (curRoutersOld, curRoutesNew) => {
-            for (let i = curRoutersOld.length - 1; i >= 0; i--) {
-                const route = curRoutersOld[i],
-                    path = route.path;
-                const myRoute = curRoutesNew.find(p => p.path === path);
+    this.setTagNavList();
+    this.addTag({
+      route: this.$store.state.app.homeRoute
+    });
+    this.setBreadCrumb(this.$route);
+    // 设置初始语言
+    this.setLocal(this.$i18n.locale);
+    // 文档提示
+    // this.$Notice.info({
+    //     'title': '想快速上手，去看文档吧',
+    //     'duration': 0,
+    //     'render': h => {
+    //         return h(
+    //             'p',
+    //             {
+    //                 'style': {
+    //                     'fontSize': '13px'
+    //                 }
+    //             },
+    //             [
+    //                 '点击',
+    //                 h(
+    //                     'a',
+    //                     {
+    //                         'attrs': {
+    //                             'href': 'https://lison16.github.io/iview-admin-doc/#/',
+    //                             'target': '_blank'
+    //                         }
+    //                     },
+    //                     'iview-admin2.0文档'
+    //                 ),
+    //                 '快速查看'
+    //             ]
+    //         );
+    //     }
+    // });
+    const fnGetRouters = (curRoutersOld, curRoutesNew) => {
+      for (let i = curRoutersOld.length - 1; i >= 0; i--) {
+        const route = curRoutersOld[i],
+          path = route.path;
+        const myRoute = curRoutesNew.find(p => p.path === path);
 
-                if (myRoute) {
-                    // route.name = myRoute.name
-                    route.redirect = myRoute.redirect;
-                    route.meta.title = myRoute.label;
-                    route.meta.icon = myRoute.icon;
-                    fnGetRouters(route.children || [], myRoute.children || []);
-                } else if (!route.isFix) {
-                    curRoutersOld.splice(i, 1);
-                }
-            }
-        };
+        if (myRoute) {
+          // route.name = myRoute.name
+          route.redirect = myRoute.redirect;
+          route.meta.title = myRoute.label;
+          route.meta.icon = myRoute.icon;
+          fnGetRouters(route.children || [], myRoute.children || []);
+        } else if (!route.isFix) {
+          //   route.meta.hideInMenu = true;
+          curRoutersOld.splice(i, 1);
+        }
+      }
+    };
 
-        fnGetRouters(routers, myRoutes);
-        this.$store.state.menuList = getMenuByRouter(
-            routers,
-            this.$root.$store.state.user.access
-        );
-        this.isShowMenu = true;
-    }
+    fnGetRouters(routers, myRoutes);
+    console.warn(666, routers);
+    this.$store.state.menuList = getMenuByRouter(
+      routers,
+      this.$root.$store.state.user.access
+    );
+    this.isShowMenu = true;
+  }
 };
 </script>

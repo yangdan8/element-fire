@@ -8,4 +8,4 @@ const fnSetFix = routers => {
   });
 };
 fnSetFix(baseRouter || []);
-export default [...baseRouter, ...sysRouter];
+export default [...sysRouter, ...baseRouter];

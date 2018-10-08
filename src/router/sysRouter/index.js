@@ -69,8 +69,8 @@ export default [
     ]
   },
   {
-    path: '/',
-    name: 'excel',
+    path: '/fff',
+    name: 'fff',
     meta: {
       icon: 'ios-stats',
       title: 'EXCEL导入导出'
@@ -84,9 +84,19 @@ export default [
           icon: 'ios-stats',
           title: 'EXCEL导入导出'
         },
-        component: resolve => {
-          require(['@/view/dict/dict-index.vue'], resolve);
-        }
+        component: () => import('@/view/dict/dict-index.vue'),
+        children: [
+          {
+            path: 'dictEdit/:id',
+            name: 'dictEdit',
+            meta: {
+              icon: 'ios-stats',
+              title: '重点单位'
+            },
+            isFix: true,
+            component: () => import('@/view//dict/dict-edit.vue')
+          }
+        ]
       }
     ]
   }
